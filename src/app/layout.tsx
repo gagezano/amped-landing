@@ -43,18 +43,8 @@ export const metadata: Metadata = {
       "Amped organizes and unlocks political and cultural power to super charge the energy transition.",
   },
   icons: {
-    icon: [
-      {
-        url: "/favicon-light.svg",
-        type: "image/svg+xml",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/favicon-dark.svg",
-        type: "image/svg+xml",
-        media: "(prefers-color-scheme: dark)",
-      },
-    ],
+    icon: [{ url: "/favicon.jpg", type: "image/jpeg", sizes: "154x154" }],
+    apple: [{ url: "/favicon.jpg", sizes: "154x154" }],
   },
 };
 
