@@ -1,6 +1,6 @@
 # Amped landing
 
-Single-page marketing site for **Amped** (Next.js App Router, TypeScript, Tailwind CSS).
+Single-page marketing site for **Amped** — Next.js App Router, TypeScript, Tailwind CSS.
 
 ## Local development
 
