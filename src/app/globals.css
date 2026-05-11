@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+:root {
+  --background: #070707;
+  --foreground: #ffffff;
+  --font-ranade: "Ranade", ui-sans-serif, system-ui, sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-ranade);
+  --font-libre: var(--font-libre-casl);
+  --font-inter: var(--font-inter-ui);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-ranade);
+}
