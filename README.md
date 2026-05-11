@@ -30,9 +30,11 @@ npm run figma:pull
 
 Writes `design/figma-snapshot.json` (create `design/` automatically).
 
-## Hero video
+## Hero background
 
-Add a looping background file at **`public/hero.mp4`**. The page always shows **`public/hero-poster.png`** first (good for LCP); the video loads after idle via a `HEAD` request—if `hero.mp4` is missing, the poster stays. **`prefers-reduced-motion: reduce`** keeps the poster only.
+The hero uses **`public/hero-bg-placeholder.png`** (~70% opacity) behind the logo block and headline copy for layout until final art/video ships. Replace that file (same path) or point [`hero-video.tsx`](src/components/landing/hero-video.tsx) at a new asset.
+
+Add a looping background at **`public/hero.mp4`** when ready; it loads after idle if present, uses the same image as **`poster`**, and respects **`prefers-reduced-motion: reduce`** (static image only).
 
 ## “Get in Touch”
 

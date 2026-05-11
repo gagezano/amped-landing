@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 
-const POSTER = "/hero-poster.png";
+/** Hero crowd / scene — swap for final art or rely on `hero.mp4` when added. */
+const HERO_BG = "/hero-bg-placeholder.png";
 const VIDEO_SRC = "/hero.mp4";
 
 function subscribeReducedMotion(onStoreChange: () => void) {
@@ -57,23 +58,29 @@ export function HeroVideo() {
   }, [useVideo]);
 
   return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden">
-      <Image
-        src={POSTER}
-        alt=""
-        fill
-        priority
-        fetchPriority="high"
-        className="object-cover object-bottom opacity-70"
-        sizes="100vw"
-        aria-hidden
-      />
+    <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+      {/*
+        next/image `fill` requires a positioned parent with non-zero size.
+        `relative` + `size-full` on this inner box satisfies that for the optimizer layout.
+      */}
+      <div className="relative size-full min-h-full min-w-full">
+        <Image
+          src={HERO_BG}
+          alt=""
+          fill
+          priority
+          fetchPriority="high"
+          className="object-cover object-center opacity-[0.7]"
+          sizes="100vw"
+          aria-hidden
+        />
+      </div>
       {!reducedMotion && useVideo ? (
         <video
           ref={videoRef}
-          className="absolute inset-0 size-full object-cover object-bottom opacity-70"
+          className="absolute inset-0 z-[1] size-full object-cover object-center opacity-[0.7]"
           src={VIDEO_SRC}
-          poster={POSTER}
+          poster={HERO_BG}
           muted
           playsInline
           loop
