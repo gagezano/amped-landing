@@ -45,7 +45,7 @@ export function HeroSection() {
 
         <div className="mt-2 flex w-full max-w-[48rem] flex-col gap-2 pb-8 pl-0 text-left sm:mt-4 sm:gap-3 sm:pl-5">
           <h1
-            className="animate-amp-reveal w-full max-w-none font-[family-name:var(--font-libre)] text-[1.875rem] font-normal leading-[1.02] tracking-[-0.03em] text-white sm:text-[clamp(1.75rem,4.6vw,3.25rem)]"
+            className="animate-amp-reveal w-full max-w-none font-[family-name:var(--font-libre)] text-[1.875rem] font-normal leading-[1.08] tracking-[-0.03em] text-white sm:text-[clamp(1.75rem,4.6vw,3.25rem)]"
             style={{ ["--amp-reveal-delay" as string]: "120ms" }}
           >
             Amped organizes the political and cultural power of the clean energy economy
