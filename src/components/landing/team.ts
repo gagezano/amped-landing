@@ -1,4 +1,4 @@
-export type TeamSocialNetwork = "linkedin" | "x" | "threads" | "instagram";
+export type TeamSocialNetwork = "linkedin";
 
 export type TeamSocialAccount = {
   network: TeamSocialNetwork;
@@ -8,9 +8,9 @@ export type TeamSocialAccount = {
 export type TeamMember = {
   name: string;
   title: string;
-  /** Stock placeholder (Unsplash); swap for real portraits when available. */
+  /** Local portrait under `public/team/` (1024×1024 JPEG). */
   imageSrc: string;
-  /** One to several profiles per person (replace hrefs when ready). */
+  /** LinkedIn profile for each person. */
   socials: TeamSocialAccount[];
 };
 
@@ -18,78 +18,49 @@ export const TEAM: TeamMember[] = [
   {
     name: "Steve McBee",
     title: "Founder & CEO",
-    imageSrc:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=800&h=800&auto=format&fit=crop",
-    socials: [
-      { network: "linkedin", href: "https://www.linkedin.com/in/steve-mcbee" },
-      { network: "x", href: "https://x.com/SteveMcBeeDC" },
-      { network: "threads", href: "https://www.threads.net/@stevemcbee" },
-    ],
+    imageSrc: "/team/steve-mcbee.jpg",
+    socials: [{ network: "linkedin", href: "https://linkedin.com/in/steve-mcbee-b521a741" }],
   },
   {
     name: "Anne Andrew",
     title: "Partner",
-    imageSrc:
-      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&h=800&auto=format&fit=crop",
-    socials: [{ network: "x", href: "https://x.com/AnneAndrewDC" }],
+    imageSrc: "/team/anne-andrew.jpg",
+    socials: [{ network: "linkedin", href: "https://linkedin.com/in/anne-slaughter-andrew-8783a19b" }],
   },
   {
     name: "Tom Carver",
     title: "Partner",
-    imageSrc:
-      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800&h=800&auto=format&fit=crop",
-    socials: [
-      { network: "threads", href: "https://www.threads.net/@tomcarver" },
-      { network: "instagram", href: "https://www.instagram.com/tomcarverenergy" },
-    ],
+    imageSrc: "/team/tom-carver.jpg",
+    socials: [{ network: "linkedin", href: "https://linkedin.com/in/tom-carver-29808938" }],
   },
   {
     name: "Adrian Deveny",
     title: "Partner",
-    imageSrc:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&h=800&auto=format&fit=crop",
-    socials: [
-      { network: "instagram", href: "https://www.instagram.com/adriandeveny" },
-      { network: "linkedin", href: "https://www.linkedin.com/in/adrian-deveny" },
-      { network: "x", href: "https://x.com/AdrianDeveny" },
-    ],
+    imageSrc: "/team/adrian-deveny.jpg",
+    socials: [{ network: "linkedin", href: "https://linkedin.com/in/adrian-deveny-32336211" }],
   },
   {
     name: "Brandon Hurlbut",
     title: "Partner",
-    imageSrc:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=800&h=800&auto=format&fit=crop",
-    socials: [{ network: "linkedin", href: "https://www.linkedin.com/in/brandon-hurlbut" }],
+    imageSrc: "/team/brandon-hurlbut.jpg",
+    socials: [{ network: "linkedin", href: "https://linkedin.com/in/brandon-hurlbut" }],
   },
   {
     name: "Meghan Nutting",
     title: "Partner",
-    imageSrc:
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&h=800&auto=format&fit=crop",
-    socials: [
-      { network: "x", href: "https://x.com/MeghanKNutting" },
-      { network: "instagram", href: "https://www.instagram.com/meghanknutting" },
-    ],
+    imageSrc: "/team/meghan-nutting.jpg",
+    socials: [{ network: "linkedin", href: "https://linkedin.com/in/meghan-nutting-6b1332b" }],
   },
   {
     name: "Fletcher Stumph",
     title: "Associate",
-    imageSrc:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&h=800&auto=format&fit=crop",
-    socials: [
-      { network: "threads", href: "https://www.threads.net/@fletcherstumph" },
-      { network: "x", href: "https://x.com/FletcherStumph" },
-    ],
+    imageSrc: "/team/fletcher-stumph.jpg",
+    socials: [{ network: "linkedin", href: "https://www.linkedin.com/in/fletcher-stumph" }],
   },
   {
     name: "Karen Zelmar",
     title: "Partner",
-    imageSrc:
-      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&h=800&auto=format&fit=crop",
-    socials: [
-      { network: "instagram", href: "https://www.instagram.com/karenzelmar" },
-      { network: "linkedin", href: "https://www.linkedin.com/in/karen-zelmar" },
-      { network: "threads", href: "https://www.threads.net/@karenzelmar" },
-    ],
+    imageSrc: "/team/karen-zelmar.jpg",
+    socials: [{ network: "linkedin", href: "https://linkedin.com/in/karenzelmar" }],
   },
 ];

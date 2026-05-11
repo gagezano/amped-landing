@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Inter, Libre_Caslon_Display } from "next/font/google";
+import { IBM_Plex_Serif, Inter } from "next/font/google";
 import "./globals.css";
 
-const libreCasl = Libre_Caslon_Display({
-  variable: "--font-libre-casl",
+const ibmPlexSerif = IBM_Plex_Serif({
+  variable: "--font-ibm-serif",
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "500"],
   display: "swap",
 });
 
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     template: "%s — Amped",
   },
   description:
-    "Amped organizes and unlocks political and cultural power to super charge the energy transition.",
+    "Amped organizes the political and cultural power of the clean energy economy to accelerate the energy transition.",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -34,13 +34,13 @@ export const metadata: Metadata = {
     siteName: "Amped",
     title: "Amped — New American Energy",
     description:
-      "Amped organizes and unlocks political and cultural power to super charge the energy transition.",
+      "Amped organizes the political and cultural power of the clean energy economy to accelerate the energy transition.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Amped — New American Energy",
     description:
-      "Amped organizes and unlocks political and cultural power to super charge the energy transition.",
+      "Amped organizes the political and cultural power of the clean energy economy to accelerate the energy transition.",
   },
   icons: {
     icon: [{ url: "/favicon.jpg", type: "image/jpeg", sizes: "154x154" }],
@@ -56,7 +56,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${libreCasl.variable} ${inter.variable} h-full antialiased`}
+      className={`${ibmPlexSerif.variable} ${inter.variable} h-full antialiased`}
     >
       <head>
         <link

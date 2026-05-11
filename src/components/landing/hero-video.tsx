@@ -2,14 +2,14 @@
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 
-/** Full-bleed looping hero: `public/featurebg.gif`. Static JPEG when motion is reduced. */
-const HERO_GIF = "/featurebg.gif";
-const HERO_JPG = "/feature-bg.jpg";
+/** Full-bleed hero backdrop: animated GIF on loop, static frame for reduced motion. */
+const HERO_GIF = "/amped-center.gif";
+const HERO_JPG = "/amped-center-still.jpg";
 const VIDEO_SRC = "/hero.mp4";
 
-/** Intrinsic ratio hint for CLS (match your GIF / JPG). */
-const HERO_BG_WIDTH = 1024;
-const HERO_BG_HEIGHT = 576;
+/** Intrinsic ratio hint for CLS (matches amped-center.gif source: 1920×1280). */
+const HERO_BG_WIDTH = 1920;
+const HERO_BG_HEIGHT = 1280;
 
 /** Full bleed + responsive focal crop (z-index on each layer). */
 const heroBackdropClassName =
@@ -32,7 +32,6 @@ function getReducedMotionServerSnapshot() {
 export function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [useVideo, setUseVideo] = useState(false);
-  const [backdropSrc, setBackdropSrc] = useState(HERO_GIF);
   const reducedMotion = useSyncExternalStore(
     subscribeReducedMotion,
     getReducedMotionSnapshot,
@@ -70,8 +69,7 @@ export function HeroVideo() {
     <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        suppressHydrationWarning
-        src={reducedMotion ? HERO_JPG : backdropSrc}
+        src={reducedMotion ? HERO_JPG : HERO_GIF}
         alt=""
         width={HERO_BG_WIDTH}
         height={HERO_BG_HEIGHT}
@@ -79,9 +77,6 @@ export function HeroVideo() {
         fetchPriority="high"
         sizes="100vw"
         className={`${heroBackdropClassName} z-0`}
-        onError={() => {
-          setBackdropSrc((prev) => (prev === HERO_JPG ? prev : HERO_JPG));
-        }}
         aria-hidden
       />
       {!reducedMotion && useVideo ? (
@@ -97,10 +92,6 @@ export function HeroVideo() {
           aria-hidden
         />
       ) : null}
-      <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-[300px] bg-gradient-to-b from-transparent to-black"
-        aria-hidden
-      />
     </div>
   );
 }

@@ -10,7 +10,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-ranade);
-  --font-libre: var(--font-libre-casl);
+  --font-libre: var(--font-ibm-serif);
   --font-inter: var(--font-inter-ui);
 }
 
@@ -44,10 +44,114 @@ body {
   animation-delay: var(--amp-reveal-delay, 0ms);
 }
 
+/* Logo "sticker stack": 6 layered stickers snap in one per GIF frame (1.39s), then all reset. */
+@keyframes amp-sticker-1 {
+  0%,    99.99% { opacity: 1; }
+  100%          { opacity: 0; }
+}
+@keyframes amp-sticker-2 {
+  0%,    16.66% { opacity: 0; }
+  16.67%, 99.99% { opacity: 1; }
+  100%          { opacity: 0; }
+}
+@keyframes amp-sticker-3 {
+  0%,    33.33% { opacity: 0; }
+  33.34%, 99.99% { opacity: 1; }
+  100%          { opacity: 0; }
+}
+@keyframes amp-sticker-4 {
+  0%,    50%    { opacity: 0; }
+  50.01%, 99.99% { opacity: 1; }
+  100%          { opacity: 0; }
+}
+@keyframes amp-sticker-5 {
+  0%,    66.66% { opacity: 0; }
+  66.67%, 99.99% { opacity: 1; }
+  100%          { opacity: 0; }
+}
+@keyframes amp-sticker-6 {
+  0%,    83.33% { opacity: 0; }
+  83.34%, 99.99% { opacity: 1; }
+  100%          { opacity: 0; }
+}
+
+/* Wrapper handles initial reveal; layers stack via grid and animate independently. */
+.amp-sticker-stack {
+  opacity: 0;
+  animation: amp-reveal-up 0.85s cubic-bezier(0.22, 1, 0.36, 1) var(--amp-reveal-delay, 0ms) forwards;
+}
+
+.amp-sticker-layer {
+  grid-column: 1;
+  grid-row: 1;
+  opacity: 0;
+  animation-duration: 8.34s; /* 6 × 1.39s — full GIF frame for each sticker */
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.amp-sticker-layer-1 { animation-name: amp-sticker-1; }
+.amp-sticker-layer-2 { animation-name: amp-sticker-2; }
+.amp-sticker-layer-3 { animation-name: amp-sticker-3; }
+.amp-sticker-layer-4 { animation-name: amp-sticker-4; }
+.amp-sticker-layer-5 { animation-name: amp-sticker-5; }
+.amp-sticker-layer-6 { animation-name: amp-sticker-6; }
+
+/* "Get in Touch" color cycle — steps through the six sticker color combos while hovered/focused. */
+@keyframes amp-button-glow {
+  0%,    16.66% {
+    background-color: #fff200;
+    color: #6b00d4;
+    border-color: #fff200;
+  }
+  16.67%, 33.33% {
+    background-color: #b9ff00;
+    color: #c8147a;
+    border-color: #b9ff00;
+  }
+  33.34%, 50% {
+    background-color: #00e6ff;
+    color: #ff6a00;
+    border-color: #00e6ff;
+  }
+  50.01%, 66.66% {
+    background-color: #ff00aa;
+    color: #fff200;
+    border-color: #ff00aa;
+  }
+  66.67%, 83.33% {
+    background-color: #ff6a00;
+    color: #0040ff;
+    border-color: #ff6a00;
+  }
+  83.34%, 100% {
+    background-color: #ffffff;
+    color: #070707;
+    border-color: #ffffff;
+  }
+}
+
+.amp-button-cycle:hover,
+.amp-button-cycle:focus-visible {
+  animation: amp-button-glow 1.2s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-amp-reveal {
     animation: none;
     opacity: 1;
     transform: none;
+  }
+  .amp-sticker-stack {
+    animation: none;
+    opacity: 1;
+  }
+  .amp-sticker-layer { animation: none; opacity: 0; }
+  .amp-sticker-layer-1 { opacity: 1; }
+  .amp-button-cycle:hover,
+  .amp-button-cycle:focus-visible {
+    animation: none;
+    background-color: #ffffff;
+    color: #070707;
+    border-color: #ffffff;
   }
 }

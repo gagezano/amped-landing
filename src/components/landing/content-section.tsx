@@ -4,7 +4,7 @@ import { TeamSocialLinks } from "./team-brand-social-icons";
 import { TEAM } from "./team";
 
 const teamPhotoClassName =
-  "object-cover grayscale contrast-[1.28] brightness-[0.88] origin-center transition-[transform,filter] duration-1000 ease-out will-change-transform group-hover:scale-105 group-hover:brightness-110 group-hover:contrast-125";
+  "object-cover origin-center transition-transform duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform group-hover:scale-[1.14] group-focus-visible:scale-[1.14]";
 
 export function ContentSection() {
   return (
@@ -12,7 +12,7 @@ export function ContentSection() {
       <div className="mx-auto max-w-[90rem]">
         <div className="mx-auto flex w-full max-w-[56rem] flex-col gap-3 lg:mx-0 lg:max-w-[48rem]">
           <h2
-            className="animate-amp-reveal w-full max-w-[30rem] font-[family-name:var(--font-libre)] text-[2rem] font-normal leading-[1.15] tracking-[-0.03em] text-white sm:max-w-[32rem]"
+            className="animate-amp-reveal w-full max-w-[40rem] font-[family-name:var(--font-libre)] text-[1.75rem] font-normal leading-[1.15] tracking-[-0.03em] text-white sm:max-w-[44rem]"
             style={{ ["--amp-reveal-delay" as string]: "280ms" }}
           >
             We are commercial operators, investors, and strategists grounded in market
@@ -27,28 +27,49 @@ export function ContentSection() {
           </p>
 
           <ul className="mt-14 grid w-full grid-cols-2 gap-x-[30px] gap-y-16 sm:grid-cols-3 md:grid-cols-4 lg:mt-16">
-            {TEAM.map((m, i) => (
-              <li
-                key={m.name}
-                className="animate-amp-reveal flex min-w-0 w-full flex-col gap-2.5"
-                style={{ ["--amp-reveal-delay" as string]: `${440 + i * 48}ms` }}
-              >
-                <div className="group relative aspect-square w-full cursor-default overflow-hidden bg-neutral-900">
-                  <Image
-                    src={m.imageSrc}
-                    alt=""
-                    fill
-                    sizes="(max-width: 640px) 42vw, (max-width: 768px) 28vw, 22vw"
-                    className={teamPhotoClassName}
-                  />
-                </div>
-                <div className="flex flex-col gap-0 text-base tracking-[-0.04em] text-white">
-                  <p className="font-[family-name:var(--font-ranade)] font-bold leading-tight">{m.name}</p>
-                  <p className="font-[family-name:var(--font-ranade)] text-sm font-normal leading-tight">{m.title}</p>
-                  <TeamSocialLinks name={m.name} socials={m.socials} />
-                </div>
-              </li>
-            ))}
+            {TEAM.map((m, i) => {
+              const linkedin = m.socials.find((s) => s.network === "linkedin")?.href;
+              return (
+                <li
+                  key={m.name}
+                  className="animate-amp-reveal flex min-w-0 w-full flex-col gap-2.5"
+                  style={{ ["--amp-reveal-delay" as string]: `${440 + i * 48}ms` }}
+                >
+                  {linkedin ? (
+                    <a
+                      href={linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${m.name} on LinkedIn`}
+                      className="group relative aspect-square w-full overflow-hidden bg-neutral-900 outline-none focus-visible:ring-2 focus-visible:ring-white"
+                    >
+                      <Image
+                        src={m.imageSrc}
+                        alt=""
+                        fill
+                        sizes="(max-width: 640px) 42vw, (max-width: 768px) 28vw, 22vw"
+                        className={teamPhotoClassName}
+                      />
+                    </a>
+                  ) : (
+                    <div className="group relative aspect-square w-full cursor-default overflow-hidden bg-neutral-900">
+                      <Image
+                        src={m.imageSrc}
+                        alt=""
+                        fill
+                        sizes="(max-width: 640px) 42vw, (max-width: 768px) 28vw, 22vw"
+                        className={teamPhotoClassName}
+                      />
+                    </div>
+                  )}
+                  <div className="flex flex-col gap-0 text-base tracking-[-0.04em] text-white">
+                    <p className="font-[family-name:var(--font-ranade)] font-bold leading-tight">{m.name}</p>
+                    <p className="mt-0.5 font-[family-name:var(--font-libre)] text-[0.6875rem] font-normal uppercase leading-tight tracking-[0.14em] text-white/75">{m.title}</p>
+                    <TeamSocialLinks name={m.name} socials={m.socials} />
+                  </div>
+                </li>
+              );
+            })}
           </ul>
 
           <div
@@ -57,7 +78,7 @@ export function ContentSection() {
           >
             <Link
               href="mailto:hello@amped.energy"
-              className="inline-flex h-[3.3rem] min-w-[9.7rem] items-center justify-center border border-white bg-black px-7 font-[family-name:var(--font-ranade)] text-sm font-normal uppercase tracking-[0.02em] text-white transition-colors duration-200 hover:border-black hover:bg-white hover:text-black"
+              className="amp-button-cycle inline-flex h-[3.3rem] min-w-[9.7rem] items-center justify-center border border-white bg-black px-7 font-[family-name:var(--font-ranade)] text-sm font-normal uppercase tracking-[0.02em] text-white transition-colors duration-200"
             >
               Get in Touch
             </Link>
