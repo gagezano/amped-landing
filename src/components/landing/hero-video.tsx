@@ -1,10 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 
-/** Hero crowd / scene — swap for final art or rely on `hero.mp4` when added. */
-const HERO_BG = "/hero-bg-placeholder.png";
+/** Hero crowd / scene (file is JPEG; use .jpg extension). */
+const HERO_BG = "/hero-bg-placeholder.jpg";
 const VIDEO_SRC = "/hero.mp4";
 
 function subscribeReducedMotion(onStoreChange: () => void) {
@@ -60,21 +59,20 @@ export function HeroVideo() {
   return (
     <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
       {/*
-        next/image `fill` requires a positioned parent with non-zero size.
-        `relative` + `size-full` on this inner box satisfies that for the optimizer layout.
+        Plain <img> from /public avoids the `/_next/image` pipeline. The prior asset was
+        JPEG bytes saved as `.png`, which can produce a blank/broken optimized image.
       */}
-      <div className="relative size-full min-h-full min-w-full">
-        <Image
-          src={HERO_BG}
-          alt=""
-          fill
-          priority
-          fetchPriority="high"
-          className="object-cover object-center opacity-[0.7]"
-          sizes="100vw"
-          aria-hidden
-        />
-      </div>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={HERO_BG}
+        alt=""
+        width={2048}
+        height={1240}
+        decoding="async"
+        fetchPriority="high"
+        className="absolute inset-0 size-full max-h-none object-cover object-center opacity-[0.7]"
+        aria-hidden
+      />
       {!reducedMotion && useVideo ? (
         <video
           ref={videoRef}
