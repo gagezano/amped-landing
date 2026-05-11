@@ -16,7 +16,7 @@ export function HeroSection() {
     <section className="relative isolate min-h-svh overflow-hidden bg-[#070707] md:min-h-[min(100svh,56rem)]">
       <HeroVideo />
 
-      <div className="relative z-10 mx-auto flex min-h-svh max-w-[90rem] flex-col px-4 pb-16 pt-6 sm:px-6 md:min-h-[min(100svh,56rem)] lg:px-10">
+      <div className="relative z-10 mx-auto flex min-h-svh max-w-[90rem] flex-col px-4 pb-16 pt-12 sm:px-6 sm:pt-6 md:min-h-[min(100svh,56rem)] lg:px-10">
         <header
           className="amp-sticker-stack relative -mt-1 grid w-fit origin-top-left sm:mt-0"
           style={{ ["--amp-reveal-delay" as string]: "40ms" }}
@@ -43,7 +43,7 @@ export function HeroSection() {
           ))}
         </header>
 
-        <div className="mt-2 flex w-full max-w-[48rem] flex-col gap-2 pb-8 pl-0 text-left sm:mt-4 sm:gap-3 sm:pl-5">
+        <div className="mt-6 flex w-full max-w-[48rem] flex-col gap-2 pb-8 pl-0 text-left sm:mt-4 sm:gap-3 sm:pl-5">
           <h1
             className="animate-amp-reveal w-full max-w-none font-[family-name:var(--font-libre)] text-[1.875rem] font-normal leading-[1.08] tracking-[-0.03em] text-white sm:text-[clamp(1.75rem,4.6vw,3.25rem)]"
             style={{ ["--amp-reveal-delay" as string]: "120ms" }}
