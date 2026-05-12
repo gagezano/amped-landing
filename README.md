@@ -44,6 +44,7 @@ Update the `mailto:` in [`src/components/landing/content-section.tsx`](src/compo
 
 1. Push the repo and import it in [Vercel](https://vercel.com).
 2. Set **`NEXT_PUBLIC_SITE_URL`** in Vercel to your production URL.
-3. In Cloudflare, point DNS at Vercel (or proxy to Vercel’s origin) using the same pattern as your other sites. Keep HTML caching conservative if you personalize later; long-cache static assets under `/_next/static` and `public/`.
+3. In the Vercel project **Settings → Domains**, add **both** the apex and `www` host (e.g. `amped.org` and `www.amped.org`) so both hit this deployment. [`src/proxy.ts`](src/proxy.ts) **308-redirects** the non-canonical host to the canonical host from `NEXT_PUBLIC_SITE_URL` (same path and query), so crawlers get identical HTML whether someone types `amped.org` or `www.amped.org`.
+4. In Cloudflare, point DNS at Vercel (or proxy to Vercel’s origin) using the same pattern as your other sites. Keep HTML caching conservative if you personalize later; long-cache static assets under `/_next/static` and `public/`.
 
 Link previews (Open Graph + Twitter) use **`public/social/link-preview.png`**, referenced in [`src/app/layout.tsx`](src/app/layout.tsx) with cache-busting query params on Vercel. Set **`NEXT_PUBLIC_SITE_URL`** to your canonical production URL (e.g. `https://www.amped.org` or `www.amped.org` — a scheme is added if omitted). If it is missing at build time, the app falls back to **`https://$VERCEL_URL`** so meta tags are never `http://localhost`. Bump **`SHARE_IMAGE_REVISION`** in `layout.tsx` when you replace the PNG to invalidate stubborn client caches. Favicons are theme-aware SVGs in `public/`.
