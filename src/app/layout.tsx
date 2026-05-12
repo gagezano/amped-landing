@@ -43,6 +43,9 @@ function getSiteOrigin(): string {
 
 const siteUrl = getSiteOrigin();
 
+/** Title in Open Graph / Twitter link previews (og:title, twitter:title). */
+const LINK_PREVIEW_TITLE = "AMPED - New American Energy";
+
 /** Short line shown under the title in Open Graph / Twitter / most link previews. */
 const LINK_PREVIEW_DESCRIPTION =
   "Building the systems enabling clean energy to win.";
@@ -86,7 +89,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "/",
     siteName: "Amped",
-    title: "Amped — New American Energy",
+    title: LINK_PREVIEW_TITLE,
     description: LINK_PREVIEW_DESCRIPTION,
     images: [
       {
@@ -96,14 +99,14 @@ export const metadata: Metadata = {
           : {}),
         width: SOCIAL_SHARE_WIDTH,
         height: SOCIAL_SHARE_HEIGHT,
-        alt: "Amped — New American Energy",
+        alt: LINK_PREVIEW_TITLE,
         type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Amped — New American Energy",
+    title: LINK_PREVIEW_TITLE,
     description: LINK_PREVIEW_DESCRIPTION,
     images: [absoluteSocialShareImage],
   },
