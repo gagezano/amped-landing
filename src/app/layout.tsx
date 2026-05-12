@@ -22,12 +22,14 @@ const inter = Inter({
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "http://localhost:3000";
 
-/** Single canonical social image (see `public/amped-opengraph.jpg`). */
-const SOCIAL_SHARE_PATH = "/amped-opengraph.jpg";
+/** Canonical link-preview art — replace `public/amped-og-share.png` when the design updates. */
+const SOCIAL_SHARE_PATH = "/amped-og-share.png";
+const SOCIAL_SHARE_WIDTH = 1024;
+const SOCIAL_SHARE_HEIGHT = 535;
 
 /**
- * Link previews cache aggressively. Bust cache on each Vercel deploy so og:image
- * URL changes when you ship a new asset (without relying on scrapers re-fetching the same path).
+ * Chat apps cache preview URLs aggressively. Append a deploy-scoped query on Vercel so
+ * each production deploy gets a distinct og:image URL without renaming the file.
  */
 function socialShareImageUrl(): string {
   const bust =
@@ -56,9 +58,10 @@ export const metadata: Metadata = {
     images: [
       {
         url: socialShareImage,
-        width: 1200,
-        height: 630,
+        width: SOCIAL_SHARE_WIDTH,
+        height: SOCIAL_SHARE_HEIGHT,
         alt: "Amped — New American Energy",
+        type: "image/png",
       },
     ],
   },
