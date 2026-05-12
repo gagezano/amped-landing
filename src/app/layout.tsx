@@ -19,25 +19,46 @@ const inter = Inter({
   display: "swap",
 });
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "http://localhost:3000";
+/**
+ * Absolute site origin for Open Graph / Twitter. Instagram and others require HTTPS
+ * and a public host — never fall back to localhost in production builds.
+ */
+function getSiteOrigin(): string {
+  const explicit = process.env.NEXT_PUBLIC_SITE_URL?.trim().replace(/\/$/, "");
+  if (explicit) return explicit;
+  const vercelHost = process.env.VERCEL_URL?.trim().replace(/\/$/, "");
+  if (vercelHost) return `https://${vercelHost}`;
+  return "http://localhost:3000";
+}
 
-/** Canonical link-preview art — replace `public/amped-og-share.png` when the design updates. */
-const SOCIAL_SHARE_PATH = "/amped-og-share.png";
+const siteUrl = getSiteOrigin();
+
+/** Canonical link-preview art — replace `public/social/link-preview.png` when the design updates. */
+const SOCIAL_SHARE_PATH = "/social/link-preview.png";
 const SOCIAL_SHARE_WIDTH = 1024;
 const SOCIAL_SHARE_HEIGHT = 535;
 
+/** Bump when replacing the PNG so iMessage / MMS caches see a new path even between deploys. */
+const SHARE_IMAGE_REVISION = "2";
+
 /**
- * Chat apps cache preview URLs aggressively. Append a deploy-scoped query on Vercel so
- * each production deploy gets a distinct og:image URL without renaming the file.
+ * Chat apps cache preview URLs aggressively. Use deploy id + revision so each ship
+ * gets a distinct og:image URL (some clients strip query params; path change still helps).
  */
 function socialShareImageUrl(): string {
   const bust =
     process.env.VERCEL_DEPLOYMENT_ID || process.env.VERCEL_GIT_COMMIT_SHA || "";
-  return bust ? `${SOCIAL_SHARE_PATH}?v=${encodeURIComponent(bust)}` : SOCIAL_SHARE_PATH;
+  const qs = new URLSearchParams();
+  if (bust) qs.set("v", bust);
+  qs.set("r", SHARE_IMAGE_REVISION);
+  const q = qs.toString();
+  return q ? `${SOCIAL_SHARE_PATH}?${q}` : SOCIAL_SHARE_PATH;
 }
 
 const socialShareImage = socialShareImageUrl();
+
+/** Absolute URL for og:image / twitter:image (some crawlers ignore relative URLs). */
+const absoluteSocialShareImage = new URL(socialShareImage, `${siteUrl}/`).toString();
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -57,7 +78,10 @@ export const metadata: Metadata = {
       "Amped organizes the political and cultural power of the clean energy economy to accelerate the energy transition.",
     images: [
       {
-        url: socialShareImage,
+        url: absoluteSocialShareImage,
+        ...(siteUrl.startsWith("https")
+          ? { secureUrl: absoluteSocialShareImage }
+          : {}),
         width: SOCIAL_SHARE_WIDTH,
         height: SOCIAL_SHARE_HEIGHT,
         alt: "Amped — New American Energy",
@@ -70,7 +94,7 @@ export const metadata: Metadata = {
     title: "Amped — New American Energy",
     description:
       "Amped organizes the political and cultural power of the clean energy economy to accelerate the energy transition.",
-    images: [socialShareImage],
+    images: [absoluteSocialShareImage],
   },
   icons: {
     icon: [
