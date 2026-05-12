@@ -43,6 +43,10 @@ function getSiteOrigin(): string {
 
 const siteUrl = getSiteOrigin();
 
+/** Short line shown under the title in Open Graph / Twitter / most link previews. */
+const LINK_PREVIEW_DESCRIPTION =
+  "Building the systems enabling clean energy to win.";
+
 /** Canonical link-preview art — replace `public/social/link-preview.png` when the design updates. */
 const SOCIAL_SHARE_PATH = "/social/link-preview.png";
 const SOCIAL_SHARE_WIDTH = 1024;
@@ -76,16 +80,14 @@ export const metadata: Metadata = {
     default: "Amped — New American Energy",
     template: "%s — Amped",
   },
-  description:
-    "Amped organizes the political and cultural power of the clean energy economy to accelerate the energy transition.",
+  description: LINK_PREVIEW_DESCRIPTION,
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "/",
     siteName: "Amped",
     title: "Amped — New American Energy",
-    description:
-      "Amped organizes the political and cultural power of the clean energy economy to accelerate the energy transition.",
+    description: LINK_PREVIEW_DESCRIPTION,
     images: [
       {
         url: absoluteSocialShareImage,
@@ -102,8 +104,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Amped — New American Energy",
-    description:
-      "Amped organizes the political and cultural power of the clean energy economy to accelerate the energy transition.",
+    description: LINK_PREVIEW_DESCRIPTION,
     images: [absoluteSocialShareImage],
   },
   icons: {
