@@ -52,10 +52,12 @@ export function HeroSection() {
             to accelerate the energy transition.
           </h1>
           <p
-            className="animate-amp-reveal w-fit max-w-xl bg-black px-1 font-[family-name:var(--font-ranade)] text-base font-medium leading-relaxed tracking-[-0.05em] text-white sm:text-lg"
+            className="animate-amp-reveal max-w-xl font-[family-name:var(--font-ranade)] text-base font-medium leading-relaxed tracking-[-0.05em] text-white sm:text-lg"
             style={{ ["--amp-reveal-delay" as string]: "200ms" }}
           >
-            Building the systems enabling clean energy to win.
+            <span className="bg-black px-1 py-0.5 [-webkit-box-decoration-break:clone] [box-decoration-break:clone]">
+              Building the systems enabling clean energy to win.
+            </span>
           </p>
         </div>
       </div>

@@ -31,6 +31,7 @@ function getReducedMotionServerSnapshot() {
 export function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [useVideo, setUseVideo] = useState(false);
+  const [videoFailed, setVideoFailed] = useState(false);
   const reducedMotion = useSyncExternalStore(
     subscribeReducedMotion,
     getReducedMotionSnapshot,
@@ -40,13 +41,9 @@ export function HeroVideo() {
   useEffect(() => {
     if (reducedMotion) return;
 
-    const start = () => {
-      fetch(VIDEO_SRC, { method: "HEAD" })
-        .then((res) => {
-          if (res.ok) setUseVideo(true);
-        })
-        .catch(() => {});
-    };
+    // Do not gate on fetch(HEAD): many CDNs/mobile paths return 403/405 for HEAD
+    // even when GET works, so the hero would never switch to <video>.
+    const start = () => setUseVideo(true);
 
     if ("requestIdleCallback" in window) {
       const id = window.requestIdleCallback(start);
@@ -57,14 +54,19 @@ export function HeroVideo() {
   }, [reducedMotion]);
 
   useEffect(() => {
-    if (!useVideo || !videoRef.current) return;
+    if (!useVideo || videoFailed || !videoRef.current) return;
     const v = videoRef.current;
+    v.defaultMuted = true;
     v.muted = true;
+    v.playsInline = true;
+    v.setAttribute("playsinline", "");
+    v.setAttribute("webkit-playsinline", "");
+    v.load();
     const p = v.play();
     if (p) void p.catch(() => {});
-  }, [useVideo]);
+  }, [useVideo, videoFailed]);
 
-  const showVideo = !reducedMotion && useVideo;
+  const showVideo = !reducedMotion && useVideo && !videoFailed;
 
   return (
     <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
@@ -76,8 +78,10 @@ export function HeroVideo() {
           poster={HERO_JPG}
           muted
           playsInline
+          autoPlay
           loop
-          preload="metadata"
+          preload="auto"
+          onError={() => setVideoFailed(true)}
           aria-hidden
         />
       ) : (
