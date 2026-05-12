@@ -2,12 +2,11 @@
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 
-/** Full-bleed hero backdrop: animated GIF on loop, static frame for reduced motion. */
-const HERO_GIF = "/amped-center.gif";
+/** Full-bleed hero backdrop: looping MP4 with a still JPG fallback for SSR & reduced motion. */
 const HERO_JPG = "/amped-center-still.jpg";
 const VIDEO_SRC = "/hero.mp4";
 
-/** Intrinsic ratio hint for CLS (matches amped-center.gif source: 1920×1280). */
+/** Intrinsic ratio hint for CLS (matches source media: 1920×1280). */
 const HERO_BG_WIDTH = 1920;
 const HERO_BG_HEIGHT = 1280;
 
@@ -65,24 +64,14 @@ export function HeroVideo() {
     if (p) void p.catch(() => {});
   }, [useVideo]);
 
+  const showVideo = !reducedMotion && useVideo;
+
   return (
     <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={reducedMotion ? HERO_JPG : HERO_GIF}
-        alt=""
-        width={HERO_BG_WIDTH}
-        height={HERO_BG_HEIGHT}
-        decoding="async"
-        fetchPriority="high"
-        sizes="100vw"
-        className={`${heroBackdropClassName} z-0`}
-        aria-hidden
-      />
-      {!reducedMotion && useVideo ? (
+      {showVideo ? (
         <video
           ref={videoRef}
-          className={`${heroBackdropClassName} z-1`}
+          className={heroBackdropClassName}
           src={VIDEO_SRC}
           poster={HERO_JPG}
           muted
@@ -91,7 +80,20 @@ export function HeroVideo() {
           preload="metadata"
           aria-hidden
         />
-      ) : null}
+      ) : (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={HERO_JPG}
+          alt=""
+          width={HERO_BG_WIDTH}
+          height={HERO_BG_HEIGHT}
+          decoding="async"
+          fetchPriority="high"
+          sizes="100vw"
+          className={heroBackdropClassName}
+          aria-hidden
+        />
+      )}
     </div>
   );
 }

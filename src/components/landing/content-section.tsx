@@ -4,18 +4,18 @@ import { TeamSocialLinks } from "./team-brand-social-icons";
 import { TEAM } from "./team";
 
 const teamPhotoClassName =
-  "object-cover origin-center transition-transform duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform group-hover:scale-[1.14] group-focus-visible:scale-[1.14]";
+  "object-cover origin-center transition-transform duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform group-hover:scale-[1.14] group-focus-within:scale-[1.14]";
 
 export function ContentSection() {
   return (
     <section className="bg-[#070707] px-4 pb-[30px] pt-12 sm:px-6 lg:px-10">
       <div className="mx-auto max-w-[90rem]">
-        <div className="mx-auto flex w-full max-w-[56rem] flex-col gap-3 lg:mx-0 lg:max-w-[48rem] xl:max-w-[88rem]">
+        <div className="mx-auto flex w-full max-w-[56rem] flex-col gap-2.5 lg:mx-0 lg:max-w-[48rem] xl:max-w-[88rem]">
           <h2
             className="animate-amp-reveal w-full max-w-[40rem] font-[family-name:var(--font-ranade)] text-[1.5rem] font-normal leading-[1.22] tracking-[-0.03em] text-white sm:max-w-[44rem]"
             style={{ ["--amp-reveal-delay" as string]: "280ms" }}
           >
-            We are commercial operators, investors, and strategists grounded in market
+            We are commercial operators, investors &amp; strategists grounded in market
             reality, not abstraction.
           </h2>
           <p
@@ -32,7 +32,7 @@ export function ContentSection() {
               return (
                 <li
                   key={m.name}
-                  className="animate-amp-reveal flex min-w-0 w-full flex-col gap-2.5"
+                  className="animate-amp-reveal group flex min-w-0 w-full flex-col gap-2.5"
                   style={{ ["--amp-reveal-delay" as string]: `${440 + i * 48}ms` }}
                 >
                   {linkedin ? (
@@ -41,7 +41,7 @@ export function ContentSection() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${m.name} on LinkedIn`}
-                      className="group relative aspect-square w-full overflow-hidden bg-neutral-900 outline-none focus-visible:ring-2 focus-visible:ring-white"
+                      className="relative aspect-square w-full overflow-hidden bg-neutral-900 outline-none focus-visible:ring-2 focus-visible:ring-white"
                     >
                       <Image
                         src={m.imageSrc}
@@ -52,7 +52,7 @@ export function ContentSection() {
                       />
                     </a>
                   ) : (
-                    <div className="group relative aspect-square w-full cursor-default overflow-hidden bg-neutral-900">
+                    <div className="relative aspect-square w-full cursor-default overflow-hidden bg-neutral-900">
                       <Image
                         src={m.imageSrc}
                         alt=""
@@ -85,12 +85,18 @@ export function ContentSection() {
           </div>
 
           <p
-            className="animate-amp-reveal mt-[120px] font-[family-name:var(--font-inter)] text-xs leading-relaxed text-white/30"
+            className="animate-amp-reveal mt-[120px] flex items-center gap-1.5 font-[family-name:var(--font-inter)] text-xs leading-relaxed text-white/30"
             style={{
               ["--amp-reveal-delay" as string]: `${440 + TEAM.length * 48 + 120}ms`,
             }}
           >
-            Copyright 2026 – All Rights Reserved
+            <span
+              aria-hidden="true"
+              className="amp-mark-spin flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full border border-current pt-px text-[13px] font-normal leading-none"
+            >
+              A
+            </span>
+            <span>Copyright 2026 – All Rights Reserved</span>
           </p>
         </div>
       </div>

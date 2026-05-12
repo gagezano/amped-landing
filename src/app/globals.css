@@ -37,6 +37,11 @@ body {
 
 .animate-amp-reveal {
   opacity: 0;
+  transform: translateY(0.625rem);
+  will-change: opacity, transform;
+}
+
+.animate-amp-reveal.is-in-view {
   animation-name: amp-reveal-up;
   animation-duration: 0.85s;
   animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
@@ -78,6 +83,9 @@ body {
 /* Wrapper handles initial reveal; layers stack via grid and animate independently. */
 .amp-sticker-stack {
   opacity: 0;
+}
+
+.amp-sticker-stack.is-in-view {
   animation: amp-reveal-up 0.85s cubic-bezier(0.22, 1, 0.36, 1) var(--amp-reveal-delay, 0ms) forwards;
 }
 
@@ -135,13 +143,24 @@ body {
   animation: amp-button-glow 1.2s linear infinite;
 }
 
+/* Footer "A in circle" mark: slow continuous rotation. */
+@keyframes amp-mark-spin {
+  to { transform: rotate(360deg); }
+}
+
+.amp-mark-spin {
+  animation: amp-mark-spin 14s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .animate-amp-reveal {
+  .animate-amp-reveal,
+  .animate-amp-reveal.is-in-view {
     animation: none;
     opacity: 1;
     transform: none;
   }
-  .amp-sticker-stack {
+  .amp-sticker-stack,
+  .amp-sticker-stack.is-in-view {
     animation: none;
     opacity: 1;
   }
@@ -154,4 +173,5 @@ body {
     color: #070707;
     border-color: #ffffff;
   }
+  .amp-mark-spin { animation: none; }
 }

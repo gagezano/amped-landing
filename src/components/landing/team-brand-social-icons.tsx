@@ -36,7 +36,7 @@ export function TeamSocialLink({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex text-white/55 transition-colors duration-200 hover:text-[#0A66C2] focus-visible:text-[#0A66C2]"
+      className="inline-flex text-white/55 transition-colors duration-200 hover:text-[#0A66C2] focus-visible:text-[#0A66C2] group-hover:text-[#0A66C2] group-focus-within:text-[#0A66C2]"
       aria-label={label}
     >
       <IconForNetwork network={network} />
