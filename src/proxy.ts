@@ -11,9 +11,28 @@ function apex(hostname: string) {
   return hostname.replace(/^www\./i, "").toLowerCase();
 }
 
+/** Meta / Instagram / etc. often fetch the apex URL; some crawlers do not follow redirects. */
+function isLinkPreviewBot(userAgent: string): boolean {
+  const ua = userAgent.toLowerCase();
+  return (
+    ua.includes("facebookexternalhit") ||
+    ua.includes("facebot") ||
+    ua.includes("instagram") ||
+    ua.includes("linkedinbot") ||
+    ua.includes("twitterbot") ||
+    ua.includes("slackbot") ||
+    ua.includes("whatsapp") ||
+    ua.includes("telegram") ||
+    ua.includes("discordbot") ||
+    ua.includes("pinterest") ||
+    ua.includes("embedly")
+  );
+}
+
 /**
- * Crawlers use the host the user typed (e.g. amped.org vs www). Redirect to the
- * canonical host from NEXT_PUBLIC_SITE_URL so HTML and OG tags always match.
+ * Browsers: redirect apex ↔ www to canonical host from NEXT_PUBLIC_SITE_URL.
+ * Link-preview bots: rewrite to canonical URL so the first response is 200 HTML with
+ * og:* tags (some crawlers skip previews when they only see a redirect).
  */
 export function proxy(request: NextRequest) {
   const canonical = canonicalSiteUrl();
@@ -27,6 +46,12 @@ export function proxy(request: NextRequest) {
   const url = request.nextUrl.clone();
   url.hostname = canonical.hostname;
   url.protocol = canonical.protocol;
+
+  const ua = request.headers.get("user-agent") ?? "";
+  if (isLinkPreviewBot(ua)) {
+    return NextResponse.rewrite(url);
+  }
+
   return NextResponse.redirect(url, 308);
 }
 
