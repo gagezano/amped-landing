@@ -1,14 +1,16 @@
 import { HeroVideo } from "./hero-video";
 
-/** Six layered stickers with varied angles.
- * Angles favor counterclockwise so the bottom-right doesn't poke into the headline below. */
+/**
+ * Preview branch `preview/logo-orange`: orange-forward sticker palette for client review.
+ * Vercel will build a preview URL; merge to main only if approved, or delete branch.
+ */
 const STICKERS = [
-  { angle: 0, bg: "#ffffff", fg: "#070707" }, // base: white + black (un-rotated, aligned with headline)
-  { angle: 3, bg: "#070707", fg: "#ffffff" },
-  { angle: -11, bg: "#ffffff", fg: "#070707" },
-  { angle: 5, bg: "#070707", fg: "#ffffff" },
-  { angle: -13, bg: "#ffffff", fg: "#070707" },
-  { angle: -2, bg: "#070707", fg: "#ffffff" },
+  { angle: 0, bg: "#fff4e6", fg: "#1a0a00" },
+  { angle: 3, bg: "#1a0a00", fg: "#ff8c42" },
+  { angle: -11, bg: "#ff8c42", fg: "#1a0a00" },
+  { angle: 5, bg: "#1a0a00", fg: "#ffb380" },
+  { angle: -13, bg: "#ffb380", fg: "#1a0a00" },
+  { angle: -2, bg: "#e85d00", fg: "#fffaf5" },
 ] as const;
 
 export function HeroSection() {
