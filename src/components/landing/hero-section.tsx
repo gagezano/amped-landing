@@ -1,14 +1,14 @@
 import { HeroVideo } from "./hero-video";
 
-/** Six layered stickers — angle, bg color, and text color per sticker.
+/** Six layered stickers with varied angles.
  * Angles favor counterclockwise so the bottom-right doesn't poke into the headline below. */
 const STICKERS = [
   { angle: 0, bg: "#ffffff", fg: "#070707" }, // base: white + black (un-rotated, aligned with headline)
-  { angle: 3, bg: "#fff200", fg: "#6b00d4" }, // yellow + purple
-  { angle: -11, bg: "#b9ff00", fg: "#c8147a" }, // lime + magenta
-  { angle: 5, bg: "#00e6ff", fg: "#ff6a00" }, // cyan + orange
-  { angle: -13, bg: "#ff00aa", fg: "#fff200" }, // magenta + yellow
-  { angle: -2, bg: "#ff6a00", fg: "#0040ff" }, // orange + electric blue
+  { angle: 3, bg: "#070707", fg: "#ffffff" },
+  { angle: -11, bg: "#ffffff", fg: "#070707" },
+  { angle: 5, bg: "#070707", fg: "#ffffff" },
+  { angle: -13, bg: "#ffffff", fg: "#070707" },
+  { angle: -2, bg: "#070707", fg: "#ffffff" },
 ] as const;
 
 export function HeroSection() {
@@ -45,17 +45,17 @@ export function HeroSection() {
 
         <div className="mt-6 flex w-full max-w-[48rem] flex-col gap-2 pb-8 pl-0 text-left sm:mt-4 sm:gap-3 sm:pl-5">
           <h1
-            className="animate-amp-reveal w-full max-w-none font-[family-name:var(--font-libre)] text-[1.875rem] font-normal leading-[1.08] tracking-[-0.03em] text-white sm:text-[clamp(1.75rem,4.6vw,3.25rem)]"
+            className="animate-amp-reveal w-full max-w-none font-[family-name:var(--font-libre)] text-[1.875rem] font-medium leading-[1.08] tracking-[-0.04em] text-white sm:text-[clamp(1.75rem,4.6vw,3.25rem)]"
             style={{ ["--amp-reveal-delay" as string]: "120ms" }}
           >
-            Amped organizes the political and cultural power of the clean energy economy
+            We organize the political &amp; cultural power of the clean energy economy,
             to accelerate the energy transition.
           </h1>
           <p
-            className="animate-amp-reveal w-full max-w-xl font-[family-name:var(--font-ranade)] text-lg font-normal leading-relaxed tracking-[-0.04em] text-white sm:text-xl"
+            className="animate-amp-reveal w-fit max-w-xl bg-black px-1 font-[family-name:var(--font-ranade)] text-lg font-medium leading-relaxed tracking-[-0.05em] text-white sm:text-xl"
             style={{ ["--amp-reveal-delay" as string]: "200ms" }}
           >
-            Building the systems for clean energy to win.
+            Building the systems enabling clean energy to win.
           </p>
         </div>
       </div>

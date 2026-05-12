@@ -12,14 +12,14 @@ export function ContentSection() {
       <div className="mx-auto max-w-[90rem]">
         <div className="mx-auto flex w-full max-w-[56rem] flex-col gap-3 lg:mx-0 lg:max-w-[48rem] xl:max-w-[88rem]">
           <h2
-            className="animate-amp-reveal w-full max-w-[40rem] font-[family-name:var(--font-libre)] text-[1.5rem] font-normal leading-[1.22] tracking-[-0.03em] text-white sm:max-w-[44rem]"
+            className="animate-amp-reveal w-full max-w-[40rem] font-[family-name:var(--font-ranade)] text-[1.5rem] font-normal leading-[1.22] tracking-[-0.03em] text-white sm:max-w-[44rem]"
             style={{ ["--amp-reveal-delay" as string]: "280ms" }}
           >
             We are commercial operators, investors, and strategists grounded in market
             reality, not abstraction.
           </h2>
           <p
-            className="animate-amp-reveal max-w-xl font-[family-name:var(--font-ranade)] text-base font-normal leading-relaxed tracking-[-0.04em] text-white"
+            className="animate-amp-reveal max-w-xl font-[family-name:var(--font-libre)] text-lg font-normal leading-relaxed tracking-[-0.02em] text-white"
             style={{ ["--amp-reveal-delay" as string]: "360ms" }}
           >
             We shape the political, cultural, and institutional forces enabling capital to
@@ -73,7 +73,7 @@ export function ContentSection() {
           </ul>
 
           <div
-            className="animate-amp-reveal mt-14 lg:mt-16"
+            className="animate-amp-reveal mt-14 hidden lg:mt-16"
             style={{ ["--amp-reveal-delay" as string]: `${440 + TEAM.length * 48 + 40}ms` }}
           >
             <Link
@@ -85,7 +85,7 @@ export function ContentSection() {
           </div>
 
           <p
-            className="animate-amp-reveal mt-[200px] font-[family-name:var(--font-inter)] text-xs leading-relaxed text-white/30"
+            className="animate-amp-reveal mt-[120px] font-[family-name:var(--font-inter)] text-xs leading-relaxed text-white/30"
             style={{
               ["--amp-reveal-delay" as string]: `${440 + TEAM.length * 48 + 120}ms`,
             }}
