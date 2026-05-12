@@ -5,7 +5,7 @@ import { useEffect } from "react";
 /**
  * Universal scroll-reveal observer.
  *
- * Anything tagged with `.animate-amp-reveal` or `.amp-sticker-stack` starts
+ * Anything tagged with `.animate-amp-reveal` starts
  * in its "primed" state (opacity 0, slight downward offset) and only fades up
  * once it enters the viewport. Above-the-fold elements get the in-view class
  * within a frame of mount, so the initial hero load still feels instant.
@@ -16,7 +16,7 @@ import { useEffect } from "react";
 export function RevealObserver() {
   useEffect(() => {
     const targets = document.querySelectorAll<HTMLElement>(
-      ".animate-amp-reveal, .amp-sticker-stack",
+      ".animate-amp-reveal",
     );
     if (targets.length === 0) return;
 

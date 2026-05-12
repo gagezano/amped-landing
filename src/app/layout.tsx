@@ -145,7 +145,7 @@ export default function RootLayout({
         />
         <noscript>
           {/* Ensure reveal-gated elements stay visible without JS / before hydration on crawlers. */}
-          <style>{`.animate-amp-reveal,.amp-sticker-stack{opacity:1!important;transform:none!important;animation:none!important}`}</style>
+          <style>{`.animate-amp-reveal{opacity:1!important;transform:none!important;animation:none!important}`}</style>
         </noscript>
       </head>
       <body className="min-h-full">{children}</body>
