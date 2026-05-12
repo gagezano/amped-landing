@@ -8,7 +8,7 @@ import { HeroVideo } from "./hero-video";
 const STICKERS = [
   { angle: 0, bg: "#ffffff", fg: "#070707" },
   { angle: 3, bg: "#ff5f00", fg: "#fff200" },
-  { angle: -11, bg: "#070707", fg: "#fff200" },
+  { angle: -11, bg: "#ff5f00", fg: "#fff200" },
   { angle: 5, bg: "#fff200", fg: "#ff5f00" },
   { angle: -13, bg: "#ffffff", fg: "#ff5f00" },
   { angle: -2, bg: "#070707", fg: "#ffffff" },
