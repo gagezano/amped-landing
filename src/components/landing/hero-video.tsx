@@ -61,9 +61,18 @@ export function HeroVideo() {
     v.playsInline = true;
     v.setAttribute("playsinline", "");
     v.setAttribute("webkit-playsinline", "");
+    const tryPlay = () => {
+      void v.play().catch(() => {});
+    };
     v.load();
-    const p = v.play();
-    if (p) void p.catch(() => {});
+    tryPlay();
+    // First play() can run before iOS has data; retrying clears the stuck play overlay when allowed.
+    v.addEventListener("loadeddata", tryPlay);
+    v.addEventListener("canplay", tryPlay);
+    return () => {
+      v.removeEventListener("loadeddata", tryPlay);
+      v.removeEventListener("canplay", tryPlay);
+    };
   }, [useVideo, videoFailed]);
 
   const showVideo = !reducedMotion && useVideo && !videoFailed;
@@ -73,7 +82,7 @@ export function HeroVideo() {
       {showVideo ? (
         <video
           ref={videoRef}
-          className={heroBackdropClassName}
+          className={`${heroBackdropClassName} amp-hero-backdrop-video`}
           src={VIDEO_SRC}
           poster={HERO_JPG}
           muted
@@ -81,6 +90,7 @@ export function HeroVideo() {
           autoPlay
           loop
           preload="auto"
+          disableRemotePlayback
           onError={() => setVideoFailed(true)}
           aria-hidden
         />
