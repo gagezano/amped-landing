@@ -22,12 +22,22 @@ const inter = Inter({
 /**
  * Absolute site origin for Open Graph / Twitter. Instagram and others require HTTPS
  * and a public host — never fall back to localhost in production builds.
+ *
+ * If `NEXT_PUBLIC_SITE_URL` is set without a scheme (e.g. `www.amped.org`), `https://`
+ * is assumed — otherwise `new URL()` throws at build time.
  */
+function withHttpsScheme(origin: string): string {
+  const t = origin.trim().replace(/\/$/, "");
+  if (!t) return t;
+  if (/^https?:\/\//i.test(t)) return t;
+  return `https://${t}`;
+}
+
 function getSiteOrigin(): string {
   const explicit = process.env.NEXT_PUBLIC_SITE_URL?.trim().replace(/\/$/, "");
-  if (explicit) return explicit;
+  if (explicit) return withHttpsScheme(explicit);
   const vercelHost = process.env.VERCEL_URL?.trim().replace(/\/$/, "");
-  if (vercelHost) return `https://${vercelHost}`;
+  if (vercelHost) return withHttpsScheme(vercelHost);
   return "http://localhost:3000";
 }
 
