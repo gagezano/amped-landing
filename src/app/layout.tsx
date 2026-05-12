@@ -22,6 +22,21 @@ const inter = Inter({
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "http://localhost:3000";
 
+/** Single canonical social image (see `public/amped-opengraph.jpg`). */
+const SOCIAL_SHARE_PATH = "/amped-opengraph.jpg";
+
+/**
+ * Link previews cache aggressively. Bust cache on each Vercel deploy so og:image
+ * URL changes when you ship a new asset (without relying on scrapers re-fetching the same path).
+ */
+function socialShareImageUrl(): string {
+  const bust =
+    process.env.VERCEL_DEPLOYMENT_ID || process.env.VERCEL_GIT_COMMIT_SHA || "";
+  return bust ? `${SOCIAL_SHARE_PATH}?v=${encodeURIComponent(bust)}` : SOCIAL_SHARE_PATH;
+}
+
+const socialShareImage = socialShareImageUrl();
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
@@ -38,12 +53,21 @@ export const metadata: Metadata = {
     title: "Amped — New American Energy",
     description:
       "Amped organizes the political and cultural power of the clean energy economy to accelerate the energy transition.",
+    images: [
+      {
+        url: socialShareImage,
+        width: 1200,
+        height: 630,
+        alt: "Amped — New American Energy",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Amped — New American Energy",
     description:
       "Amped organizes the political and cultural power of the clean energy economy to accelerate the energy transition.",
+    images: [socialShareImage],
   },
   icons: {
     icon: [

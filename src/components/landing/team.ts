@@ -8,7 +8,7 @@ export type TeamSocialAccount = {
 export type TeamMember = {
   name: string;
   title: string;
-  /** Local portrait under `public/team/` (1024×1024 JPEG). */
+  /** Local portrait under `public/team/` (square raster, e.g. JPEG or PNG). */
   imageSrc: string;
   /** LinkedIn profile for each person. */
   socials: TeamSocialAccount[];
@@ -18,7 +18,7 @@ export const TEAM: TeamMember[] = [
   {
     name: "Steve McBee",
     title: "Founder & CEO",
-    imageSrc: "/team/steve-mcbee.jpg",
+    imageSrc: "/team/steve-mcbee.png",
     socials: [{ network: "linkedin", href: "https://linkedin.com/in/steve-mcbee-b521a741" }],
   },
   {

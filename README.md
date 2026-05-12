@@ -46,4 +46,4 @@ Update the `mailto:` in [`src/components/landing/content-section.tsx`](src/compo
 2. Set **`NEXT_PUBLIC_SITE_URL`** in Vercel to your production URL.
 3. In Cloudflare, point DNS at Vercel (or proxy to Vercel’s origin) using the same pattern as your other sites. Keep HTML caching conservative if you personalize later; long-cache static assets under `/_next/static` and `public/`.
 
-Open Graph and Twitter cards use [`src/app/opengraph-image.tsx`](src/app/opengraph-image.tsx) and [`src/app/twitter-image.tsx`](src/app/twitter-image.tsx). Favicons are theme-aware SVGs in `public/`.
+Open Graph and Twitter cards use **`public/amped-opengraph.jpg`**, referenced explicitly in [`src/app/layout.tsx`](src/app/layout.tsx) (with a per-deploy cache-bust query on Vercel). Replace that file when the share image changes. Favicons are theme-aware SVGs in `public/`.
