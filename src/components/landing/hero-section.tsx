@@ -7,11 +7,11 @@ export function HeroSection() {
 
       <div className="relative z-10 mx-auto flex min-h-svh max-w-[90rem] flex-col px-4 pb-16 pt-12 sm:px-6 sm:pt-6 md:min-h-[min(100svh,56rem)] lg:px-10">
         <header
-          className="animate-amp-reveal relative -mt-1 w-fit origin-top-left sm:mt-0"
+          className="animate-amp-reveal relative -mt-[calc(0.25rem+5px)] w-fit origin-top-left pl-0 sm:pl-5 sm:mt-[-5px]"
           style={{ ["--amp-reveal-delay" as string]: "40ms" }}
           aria-label="Amped — New American Energy"
         >
-          <div className="w-fit max-w-none origin-top-left bg-white pt-1 pb-2 pl-3 pr-4 text-[#070707] sm:pb-2.5">
+          <div className="w-fit max-w-none origin-top-left scale-[0.8] bg-white pt-1 pb-2 pl-3 pr-4 text-[#070707] sm:pb-2.5 -mb-5 sm:-mb-6">
             <p className="block w-full font-[family-name:var(--font-ranade)] text-[clamp(2.125rem,min(12vw,11dvh),4.125rem)] font-bold uppercase leading-none tracking-[-0.06em]">
               amped
             </p>
