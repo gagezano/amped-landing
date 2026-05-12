@@ -1,16 +1,16 @@
 import { HeroVideo } from "./hero-video";
 
 /**
- * Preview branch `preview/logo-orange`: orange-forward sticker palette for client review.
- * Vercel will build a preview URL; merge to main only if approved, or delete branch.
+ * Preview branch `preview/logo-orange`: black, white, bright orange (#ff5f00), and bright
+ * yellow (#fff200) stickers for client review (Vercel preview). Merge to main if approved.
  */
 const STICKERS = [
-  { angle: 0, bg: "#fff4e6", fg: "#1a0a00" },
-  { angle: 3, bg: "#1a0a00", fg: "#ff8c42" },
-  { angle: -11, bg: "#ff8c42", fg: "#1a0a00" },
-  { angle: 5, bg: "#1a0a00", fg: "#ffb380" },
-  { angle: -13, bg: "#ffb380", fg: "#1a0a00" },
-  { angle: -2, bg: "#e85d00", fg: "#fffaf5" },
+  { angle: 0, bg: "#ffffff", fg: "#070707" },
+  { angle: 3, bg: "#ff5f00", fg: "#ffffff" },
+  { angle: -11, bg: "#070707", fg: "#fff200" },
+  { angle: 5, bg: "#fff200", fg: "#070707" },
+  { angle: -13, bg: "#ffffff", fg: "#ff5f00" },
+  { angle: -2, bg: "#070707", fg: "#ffffff" },
 ] as const;
 
 export function HeroSection() {
