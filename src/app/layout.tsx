@@ -56,7 +56,7 @@ const SOCIAL_SHARE_WIDTH = 1024;
 const SOCIAL_SHARE_HEIGHT = 535;
 
 /** Bump when replacing the PNG so iMessage / MMS caches see a new path even between deploys. */
-const SHARE_IMAGE_REVISION = "2";
+const SHARE_IMAGE_REVISION = "3";
 
 /**
  * Chat apps cache preview URLs aggressively. Use deploy id + revision so each ship
@@ -99,7 +99,8 @@ export const metadata: Metadata = {
           : {}),
         width: SOCIAL_SHARE_WIDTH,
         height: SOCIAL_SHARE_HEIGHT,
-        alt: LINK_PREVIEW_TITLE,
+        /** Many clients show this under the image when og:description is de-emphasized in UI. */
+        alt: LINK_PREVIEW_DESCRIPTION,
         type: "image/png",
       },
     ],
