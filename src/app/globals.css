@@ -24,17 +24,6 @@ body {
   font-family: var(--font-ranade);
 }
 
-/* Decorative muted hero clip: iOS Safari otherwise paints the inline play / media chrome. */
-.amp-hero-backdrop-video::-webkit-media-controls {
-  display: none !important;
-}
-.amp-hero-backdrop-video::-webkit-media-controls-enclosure {
-  display: none !important;
-}
-.amp-hero-backdrop-video::-webkit-media-controls-start-playback-button {
-  display: none !important;
-}
-
 @keyframes amp-reveal-up {
   from {
     opacity: 0;
