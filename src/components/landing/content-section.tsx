@@ -64,7 +64,11 @@ export function ContentSection() {
                   )}
                   <div className="flex flex-col gap-0 text-base tracking-[-0.04em] text-white">
                     <p className="font-[family-name:var(--font-ranade)] font-bold leading-tight">{m.name}</p>
-                    <p className="mt-0.5 font-[family-name:var(--font-libre)] text-[0.6875rem] font-normal uppercase leading-tight tracking-[0.14em] text-white/75">{m.title}</p>
+                    {m.title ? (
+                      <p className="mt-0.5 font-[family-name:var(--font-libre)] text-[0.6875rem] font-normal uppercase leading-tight tracking-[0.14em] text-white/75">
+                        {m.title}
+                      </p>
+                    ) : null}
                     <TeamSocialLinks name={m.name} socials={m.socials} />
                   </div>
                 </li>
