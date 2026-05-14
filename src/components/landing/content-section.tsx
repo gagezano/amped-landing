@@ -7,10 +7,17 @@ const teamPhotoClassName =
   "object-cover origin-center transition-transform duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform group-hover:scale-[1.14] group-focus-within:scale-[1.14]";
 
 export function ContentSection() {
+  const [featuredMember, ...secondaryTeam] = TEAM;
+  const featuredLinkedin = featuredMember?.socials.find((s) => s.network === "linkedin")?.href;
+  const featuredDelay = 440;
+  const secondaryDelayStart = featuredMember ? 560 : 440;
+  const contactDelay = secondaryDelayStart + secondaryTeam.length * 48 + 40;
+  const footerDelay = contactDelay + 80;
+
   return (
     <section className="bg-[#070707] px-4 pb-[30px] pt-12 sm:px-6 lg:px-10">
       <div className="mx-auto max-w-[90rem]">
-        <div className="mx-auto flex w-full max-w-[56rem] flex-col gap-2.5 lg:mx-0 lg:max-w-[48rem] xl:max-w-[88rem]">
+        <div className="mx-auto flex w-full max-w-[56rem] flex-col gap-2.5 lg:mx-0 lg:max-w-none">
           <h2
             className="animate-amp-reveal w-full max-w-[40rem] font-[family-name:var(--font-ranade)] text-[1.5rem] font-normal leading-[1.22] tracking-[-0.03em] text-white sm:max-w-[44rem]"
             style={{ ["--amp-reveal-delay" as string]: "280ms" }}
@@ -26,59 +33,107 @@ export function ContentSection() {
             flow and markets to scale.
           </p>
 
-          <ul className="mt-14 grid w-full grid-cols-2 gap-x-[30px] gap-y-16 sm:grid-cols-3 md:grid-cols-4 lg:mt-16 xl:grid-cols-8 xl:gap-x-6 xl:gap-y-10">
-            {TEAM.map((m, i) => {
-              const linkedin = m.socials.find((s) => s.network === "linkedin")?.href;
-              return (
-                <li
-                  key={m.name}
-                  className="animate-amp-reveal group flex min-w-0 w-full flex-col gap-2.5"
-                  style={{ ["--amp-reveal-delay" as string]: `${440 + i * 48}ms` }}
+          {(featuredMember || secondaryTeam.length) ? (
+            <div className="mt-14 flex flex-col items-center gap-8 lg:mt-16 lg:grid lg:max-w-[58.75rem] lg:grid-cols-[30rem_28rem] lg:items-start lg:justify-start lg:gap-5">
+              {featuredMember ? (
+                <div
+                  className="animate-amp-reveal w-full"
+                  style={{ ["--amp-reveal-delay" as string]: `${featuredDelay}ms` }}
                 >
-                  {linkedin ? (
-                    <a
-                      href={linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${m.name} on LinkedIn`}
-                      className="relative aspect-square w-full overflow-hidden bg-neutral-900 outline-none focus-visible:ring-2 focus-visible:ring-white"
-                    >
-                      <Image
-                        src={m.imageSrc}
-                        alt=""
-                        fill
-                        sizes="(max-width: 640px) 42vw, (max-width: 768px) 28vw, 22vw"
-                        className={teamPhotoClassName}
-                      />
-                    </a>
-                  ) : (
-                    <div className="relative aspect-square w-full cursor-default overflow-hidden bg-neutral-900">
-                      <Image
-                        src={m.imageSrc}
-                        alt=""
-                        fill
-                        sizes="(max-width: 640px) 42vw, (max-width: 768px) 28vw, 22vw"
-                        className={teamPhotoClassName}
-                      />
-                    </div>
-                  )}
-                  <div className="flex flex-col gap-0 text-base tracking-[-0.04em] text-white">
-                    <p className="font-[family-name:var(--font-ranade)] font-bold leading-tight">{m.name}</p>
-                    {m.title ? (
-                      <p className="mt-0.5 font-[family-name:var(--font-libre)] text-[0.6875rem] font-normal uppercase leading-tight tracking-[0.14em] text-white/75">
-                        {m.title}
+                  <div className="group relative mx-auto aspect-square w-full max-w-[26rem] overflow-hidden bg-neutral-900 md:max-w-[28rem] lg:mx-0 lg:max-w-[30rem]">
+                    <Image
+                      src={featuredMember.imageSrc}
+                      alt=""
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1280px) 46vw, 42vw"
+                      className={teamPhotoClassName}
+                    />
+                    <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/72 via-black/28 to-transparent" />
+                    <div className="absolute bottom-[20px] left-[20px] z-10 max-w-[calc(100%-40px)] text-white">
+                      <p className="font-[family-name:var(--font-ranade)] text-[1.35rem] font-normal leading-[1.22] tracking-[-0.03em] text-white">
+                        {featuredMember.name}
                       </p>
-                    ) : null}
-                    <TeamSocialLinks name={m.name} socials={m.socials} />
+                      {featuredMember.title ? (
+                        <p className="mt-1.5 font-[family-name:var(--font-libre)] text-[0.75rem] font-normal uppercase leading-tight tracking-[0.18em] text-white/80 sm:text-[0.8125rem]">
+                          {featuredMember.title}
+                        </p>
+                      ) : null}
+                      <div className="mt-1.5">
+                        <TeamSocialLinks
+                          name={featuredMember.name}
+                          socials={
+                            featuredLinkedin
+                              ? [{ network: "linkedin" as const, href: featuredLinkedin }]
+                              : featuredMember.socials
+                          }
+                        />
+                      </div>
+                    </div>
                   </div>
-                </li>
-              );
-            })}
-          </ul>
+                </div>
+              ) : null}
+
+              {secondaryTeam.length ? (
+                <ul className="flex w-full max-w-[68rem] flex-wrap justify-center gap-x-5 gap-y-8 lg:max-w-[28rem] lg:content-start lg:justify-start">
+                  {secondaryTeam.map((m, i) => {
+                    const linkedin = m.socials.find((s) => s.network === "linkedin")?.href;
+                    return (
+                      <li
+                        key={m.name}
+                        className="animate-amp-reveal group flex min-w-0 w-[7.75rem] flex-[0_0_auto] flex-col gap-1.5 sm:w-[8.25rem] xl:w-[8.5rem]"
+                        style={{ ["--amp-reveal-delay" as string]: `${secondaryDelayStart + i * 48}ms` }}
+                      >
+                        {linkedin ? (
+                          <a
+                            href={linkedin}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`${m.name} on LinkedIn`}
+                            className="relative aspect-square w-full overflow-hidden bg-neutral-900 outline-none focus-visible:ring-2 focus-visible:ring-white"
+                          >
+                            <Image
+                              src={m.imageSrc}
+                              alt=""
+                              fill
+                              sizes="(max-width: 640px) 42vw, (max-width: 768px) 28vw, (max-width: 1280px) 22vw, 15vw"
+                              className={teamPhotoClassName}
+                            />
+                          </a>
+                        ) : (
+                          <div className="relative aspect-square w-full cursor-default overflow-hidden bg-neutral-900">
+                            <Image
+                              src={m.imageSrc}
+                              alt=""
+                              fill
+                              sizes="(max-width: 640px) 42vw, (max-width: 768px) 28vw, (max-width: 1280px) 22vw, 15vw"
+                              className={teamPhotoClassName}
+                            />
+                          </div>
+                        )}
+                        <div className="flex flex-col gap-0 text-sm tracking-[-0.03em] text-white">
+                          <p className="font-[family-name:var(--font-ranade)] text-[0.9rem] font-bold leading-tight sm:text-[0.95rem]">
+                            {m.name}
+                          </p>
+                          {m.title ? (
+                            <p className="mt-0.5 font-[family-name:var(--font-libre)] text-[0.6875rem] font-normal uppercase leading-tight tracking-[0.14em] text-white/75">
+                              {m.title}
+                            </p>
+                          ) : null}
+                          <div className="origin-left scale-[0.82]">
+                            <TeamSocialLinks name={m.name} socials={m.socials} />
+                          </div>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              ) : null}
+            </div>
+          ) : null}
 
           <div
             className="animate-amp-reveal mt-14 hidden lg:mt-16"
-            style={{ ["--amp-reveal-delay" as string]: `${440 + TEAM.length * 48 + 40}ms` }}
+            style={{ ["--amp-reveal-delay" as string]: `${contactDelay}ms` }}
           >
             <Link
               href="mailto:hello@amped.energy"
@@ -91,7 +146,7 @@ export function ContentSection() {
           <p
             className="animate-amp-reveal mt-[120px] flex items-center gap-1.5 font-[family-name:var(--font-inter)] text-xs leading-relaxed text-white/30"
             style={{
-              ["--amp-reveal-delay" as string]: `${440 + TEAM.length * 48 + 120}ms`,
+              ["--amp-reveal-delay" as string]: `${footerDelay}ms`,
             }}
           >
             <span
