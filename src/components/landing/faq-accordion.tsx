@@ -73,13 +73,13 @@ function Chevron({ open }: { open: boolean }) {
     <svg
       aria-hidden
       viewBox="0 0 10 10"
-      className={`mt-1.5 h-2.5 w-2.5 shrink-0 text-white/35 transition-transform duration-300 ease-out ${open ? "-rotate-180" : ""}`}
+      className={`mt-0.5 h-6 w-6 shrink-0 text-white/35 transition-transform duration-300 ease-out ${open ? "-rotate-180" : ""}`}
       fill="none"
     >
       <path
         d="M1.5 3.25L5 6.75L8.5 3.25"
         stroke="currentColor"
-        strokeWidth="0.85"
+        strokeWidth="1.1"
         strokeLinecap="round"
         strokeLinejoin="round"
         vectorEffect="non-scaling-stroke"
@@ -104,19 +104,24 @@ export function FaqAccordion({ className = "" }: { className?: string }) {
           const panelId = `${baseId}-panel-${index}`;
           const buttonId = `${baseId}-button-${index}`;
           return (
-            <div key={item.question} className="border-b border-white/20">
+            <div
+              key={item.question}
+              className="border-b border-white/20 transition-colors duration-200 ease-out hover:bg-white/5"
+            >
               <button
                 id={buttonId}
                 type="button"
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => setOpenIndex(isOpen ? null : index)}
-                className="flex w-full items-start justify-between gap-4 py-5 text-left outline-none transition-colors hover:bg-white/[0.03] focus-visible:ring-2 focus-visible:ring-white/40"
+                className="flex w-full cursor-pointer items-start justify-between gap-3 py-5 pl-3 pr-3.5 text-left outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white/40 sm:gap-4 sm:pl-4 sm:pr-5"
               >
                 <span className="min-w-0 flex-1 font-[family-name:var(--font-ranade)] text-[1.5rem] font-normal leading-[1.22] tracking-[-0.04em] text-white">
                   {item.question}
                 </span>
-                <Chevron open={isOpen} />
+                <span className="flex shrink-0 items-start pt-0.5">
+                  <Chevron open={isOpen} />
+                </span>
               </button>
               <div
                 id={panelId}
@@ -125,7 +130,7 @@ export function FaqAccordion({ className = "" }: { className?: string }) {
                 hidden={!isOpen}
                 className={isOpen ? "block" : "hidden"}
               >
-                <div className="space-y-3 pb-6 pr-2 sm:pr-0">
+                <div className="space-y-3 pb-6 pl-3 pr-3.5 pt-0 sm:pl-4 sm:pr-5">
                   {item.paragraphs.map((p, pi) => (
                     <p
                       key={pi}

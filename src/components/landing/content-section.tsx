@@ -18,7 +18,7 @@ export function ContentSection() {
   return (
     <section className="bg-[#070707] px-4 pb-[30px] pt-12 sm:px-6 lg:px-10">
       <div className="mx-auto max-w-[90rem]">
-        <div className="mx-auto flex w-full max-w-[56rem] flex-col gap-2.5 lg:mx-0 lg:max-w-none">
+        <div className="mx-auto flex w-full max-w-[56rem] flex-col gap-1.5 lg:mx-0 lg:max-w-none">
           <h2
             className="animate-amp-reveal w-full max-w-[40rem] font-[family-name:var(--font-ranade)] text-[1.5rem] font-normal leading-[1.22] tracking-[-0.03em] text-white sm:max-w-[44rem]"
             style={{ ["--amp-reveal-delay" as string]: "280ms" }}
@@ -34,19 +34,19 @@ export function ContentSection() {
           </p>
 
           {(featuredMember || secondaryTeam.length) ? (
-            <div className="mt-14 flex w-full flex-col gap-3 lg:mt-16">
+            <div className="mt-10 flex w-full flex-col gap-3 sm:mt-12 lg:mt-14">
               <p
-                className="self-center text-center font-[family-name:var(--font-libre)] text-[0.6875rem] font-medium uppercase leading-tight tracking-[0.22em] text-white/85 sm:text-xs sm:self-start sm:text-left lg:max-w-[58.75rem]"
+                className="self-start text-left font-[family-name:var(--font-libre)] text-[0.6875rem] font-medium uppercase leading-tight tracking-[0.22em] text-white/85 sm:text-xs lg:max-w-[58.75rem]"
               >
                 TEAM
               </p>
-              <div className="flex flex-col items-center gap-8 sm:items-start lg:grid lg:max-w-[58.75rem] lg:grid-cols-[30rem_28rem] lg:items-start lg:justify-start lg:gap-5">
+              <div className="flex w-full flex-col items-start gap-8 lg:grid lg:max-w-[58.75rem] lg:grid-cols-[30rem_28rem] lg:items-start lg:justify-start lg:gap-5">
               {featuredMember ? (
                 <div
                   className="animate-amp-reveal w-full"
                   style={{ ["--amp-reveal-delay" as string]: `${featuredDelay}ms` }}
                 >
-                  <div className="group relative mx-auto aspect-square w-full max-w-[26rem] overflow-hidden bg-neutral-900 sm:mx-0 md:max-w-[28rem] lg:max-w-[30rem]">
+                  <div className="group relative aspect-square w-full max-w-[26rem] overflow-hidden bg-neutral-900 md:max-w-[28rem] lg:max-w-[30rem]">
                     <Image
                       src={featuredMember.imageSrc}
                       alt=""
@@ -80,7 +80,7 @@ export function ContentSection() {
               ) : null}
 
               {secondaryTeam.length ? (
-                <ul className="flex w-full max-w-[68rem] flex-wrap justify-center gap-x-5 gap-y-8 sm:justify-start lg:max-w-[28rem] lg:content-start">
+                <ul className="flex w-full max-w-[68rem] flex-wrap justify-start gap-x-5 gap-y-8 lg:max-w-[28rem] lg:content-start">
                   {secondaryTeam.map((m, i) => {
                     const linkedin = m.socials.find((s) => s.network === "linkedin")?.href;
                     return (
