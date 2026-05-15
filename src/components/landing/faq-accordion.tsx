@@ -2,7 +2,25 @@
 
 import { useId, useState } from "react";
 
-const FAQ_ITEMS: { question: string; paragraphs: string[] }[] = [
+const answerBodyClass =
+  "font-[family-name:var(--font-libre)] text-lg font-normal leading-relaxed tracking-[-0.02em] text-white/90";
+
+const sansBulletLabelClass =
+  "font-[family-name:var(--font-ranade)] text-xl font-bold leading-snug tracking-[-0.04em] text-white";
+
+type FaqStandard = { question: string; paragraphs: string[] };
+type FaqWithSansBullets = {
+  question: string;
+  intro: string[];
+  bullets: { label: string; body: string }[];
+};
+type FaqItem = FaqStandard | FaqWithSansBullets;
+
+function isSansBulletsItem(item: FaqItem): item is FaqWithSansBullets {
+  return "bullets" in item;
+}
+
+const FAQ_ITEMS: FaqItem[] = [
   {
     question: "What is AMPED & why is a new organization necessary?",
     paragraphs: [
@@ -46,12 +64,24 @@ const FAQ_ITEMS: { question: string; paragraphs: string[] }[] = [
   },
   {
     question: "What does AMPED actually do?",
-    paragraphs: [
-      "Four things, working as a system:",
-      "Narrative. A real-time, creator-led response platform that puts industry voices on the channels audiences actually use and fast enough to shape stories while they're forming.",
-      "Intelligence. A principals-only forum putting senior investors and operators in the same room as the policymakers shaping their markets. No lobbyists. No filter.",
-      "Market formation. Public-private coordination to break the bottlenecks slowing deployment such as transmission, virtual power plants, distributed energy, consumer markets.",
-      "Policy. Durable frameworks grounded in commercial reality, designed to attract bipartisan support and outlast any single administration.",
+    intro: ["Four things, working as a system:"],
+    bullets: [
+      {
+        label: "Narrative",
+        body: "A real-time, creator-led response platform that puts industry voices on the channels audiences actually use and fast enough to shape stories while they're forming.",
+      },
+      {
+        label: "Intelligence",
+        body: "A principals-only forum putting senior investors and operators in the same room as the policymakers shaping their markets. No lobbyists. No filter.",
+      },
+      {
+        label: "Market formation",
+        body: "Public-private coordination to break the bottlenecks slowing deployment such as transmission, virtual power plants, distributed energy, consumer markets.",
+      },
+      {
+        label: "Policy",
+        body: "Durable frameworks grounded in commercial reality, designed to attract bipartisan support and outlast any single administration.",
+      },
     ],
   },
   {
@@ -131,14 +161,27 @@ export function FaqAccordion({ className = "" }: { className?: string }) {
                 className={isOpen ? "block" : "hidden"}
               >
                 <div className="space-y-3 pb-6 pl-3 pr-3.5 pt-0 sm:pl-4 sm:pr-5">
-                  {item.paragraphs.map((p, pi) => (
-                    <p
-                      key={pi}
-                      className="font-[family-name:var(--font-libre)] text-lg font-normal leading-relaxed tracking-[-0.02em] text-white/90"
-                    >
-                      {p}
-                    </p>
-                  ))}
+                  {isSansBulletsItem(item) ? (
+                    <>
+                      {item.intro.map((p, pi) => (
+                        <p key={`intro-${pi}`} className={answerBodyClass}>
+                          {p}
+                        </p>
+                      ))}
+                      {item.bullets.map((b, bi) => (
+                        <p key={`bullet-${bi}`} className={answerBodyClass}>
+                          <span className={sansBulletLabelClass}>{b.label}.</span>{" "}
+                          <span>{b.body}</span>
+                        </p>
+                      ))}
+                    </>
+                  ) : (
+                    item.paragraphs.map((p, pi) => (
+                      <p key={pi} className={answerBodyClass}>
+                        {p}
+                      </p>
+                    ))
+                  )}
                 </div>
               </div>
             </div>
