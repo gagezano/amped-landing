@@ -80,13 +80,13 @@ export function ContentSection() {
               ) : null}
 
               {secondaryTeam.length ? (
-                <ul className="flex w-full max-w-[68rem] flex-wrap justify-start gap-x-5 gap-y-8 lg:max-w-[28rem] lg:content-start">
+                <ul className="grid w-full max-w-[26rem] grid-cols-3 gap-x-3 gap-y-6 sm:flex sm:max-w-[68rem] sm:flex-wrap sm:justify-start sm:gap-x-5 sm:gap-y-8 lg:max-w-[28rem] lg:content-start">
                   {secondaryTeam.map((m, i) => {
                     const linkedin = m.socials.find((s) => s.network === "linkedin")?.href;
                     return (
                       <li
                         key={m.name}
-                        className="animate-amp-reveal group flex min-w-0 w-[7.75rem] flex-[0_0_auto] flex-col gap-1.5 sm:w-[8.25rem] xl:w-[8.5rem]"
+                        className="animate-amp-reveal group flex min-w-0 w-full flex-col gap-1.5 sm:w-[8.25rem] sm:flex-[0_0_auto] xl:w-[8.5rem]"
                         style={{ ["--amp-reveal-delay" as string]: `${secondaryDelayStart + i * 48}ms` }}
                       >
                         {linkedin ? (
@@ -101,7 +101,7 @@ export function ContentSection() {
                               src={m.imageSrc}
                               alt=""
                               fill
-                              sizes="(max-width: 640px) 42vw, (max-width: 768px) 28vw, (max-width: 1280px) 22vw, 15vw"
+                              sizes="(max-width: 639px) 28vw, (max-width: 768px) 28vw, (max-width: 1280px) 22vw, 15vw"
                               className={teamPhotoClassName}
                             />
                           </a>
@@ -111,7 +111,7 @@ export function ContentSection() {
                               src={m.imageSrc}
                               alt=""
                               fill
-                              sizes="(max-width: 640px) 42vw, (max-width: 768px) 28vw, (max-width: 1280px) 22vw, 15vw"
+                              sizes="(max-width: 639px) 28vw, (max-width: 768px) 28vw, (max-width: 1280px) 22vw, 15vw"
                               className={teamPhotoClassName}
                             />
                           </div>
