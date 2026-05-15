@@ -23,18 +23,17 @@ export function HeroSection() {
 
         <div className="mt-6 flex w-full max-w-[48rem] flex-col gap-2 pb-8 pl-0 text-left sm:mt-4 sm:gap-3 sm:pl-5">
           <h1
-            className="animate-amp-reveal w-full max-w-none font-[family-name:var(--font-libre)] text-[1.875rem] font-medium leading-[1.08] tracking-[-0.04em] text-white sm:text-[clamp(1.75rem,4.6vw,3.25rem)]"
+            className="animate-amp-reveal w-full max-w-none font-[family-name:var(--font-libre)] text-[calc(1.875rem*1.35)] font-medium leading-[1.08] tracking-[-0.04em] text-white sm:text-[clamp(calc(1.75rem*1.35),6.21vw,calc(3.25rem*1.35))]"
             style={{ ["--amp-reveal-delay" as string]: "120ms" }}
           >
-            We organize the political &amp; cultural power of the clean energy economy,
-            to accelerate the energy transition.
+            Organizing the clean energy revolution
           </h1>
           <p
             className="animate-amp-reveal max-w-xl font-[family-name:var(--font-ranade)] text-base font-medium leading-relaxed tracking-[-0.05em] text-white sm:text-lg"
             style={{ ["--amp-reveal-delay" as string]: "200ms" }}
           >
             <span className="bg-black px-1 py-0.5 [-webkit-box-decoration-break:clone] [box-decoration-break:clone]">
-              Building the systems enabling clean energy to win.
+              We build the systems needed to power the clean energy economy.
             </span>
           </p>
         </div>

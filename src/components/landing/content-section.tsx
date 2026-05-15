@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FaqAccordion } from "./faq-accordion";
 import { TeamSocialLinks } from "./team-brand-social-icons";
 import { TEAM } from "./team";
 
@@ -22,25 +23,30 @@ export function ContentSection() {
             className="animate-amp-reveal w-full max-w-[40rem] font-[family-name:var(--font-ranade)] text-[1.5rem] font-normal leading-[1.22] tracking-[-0.03em] text-white sm:max-w-[44rem]"
             style={{ ["--amp-reveal-delay" as string]: "280ms" }}
           >
-            We are commercial operators, investors &amp; strategists grounded in market
-            reality, not abstraction.
+            We are commercial operators, investors, &amp; strategists.
           </h2>
           <p
             className="animate-amp-reveal max-w-xl font-[family-name:var(--font-libre)] text-lg font-normal leading-relaxed tracking-[-0.02em] text-white"
             style={{ ["--amp-reveal-delay" as string]: "360ms" }}
           >
-            We shape the political, cultural, and institutional forces enabling capital to
-            flow and markets to scale.
+            Focused on strengthening the political, cultural, and market infrastructure
+            required for the energy transition to scale.
           </p>
 
           {(featuredMember || secondaryTeam.length) ? (
-            <div className="mt-14 flex flex-col items-center gap-8 lg:mt-16 lg:grid lg:max-w-[58.75rem] lg:grid-cols-[30rem_28rem] lg:items-start lg:justify-start lg:gap-5">
+            <div className="mt-14 flex w-full flex-col gap-3 lg:mt-16">
+              <p
+                className="self-center text-center font-[family-name:var(--font-libre)] text-[0.6875rem] font-medium uppercase leading-tight tracking-[0.22em] text-white/85 sm:text-xs sm:self-start sm:text-left lg:max-w-[58.75rem]"
+              >
+                TEAM
+              </p>
+              <div className="flex flex-col items-center gap-8 sm:items-start lg:grid lg:max-w-[58.75rem] lg:grid-cols-[30rem_28rem] lg:items-start lg:justify-start lg:gap-5">
               {featuredMember ? (
                 <div
                   className="animate-amp-reveal w-full"
                   style={{ ["--amp-reveal-delay" as string]: `${featuredDelay}ms` }}
                 >
-                  <div className="group relative mx-auto aspect-square w-full max-w-[26rem] overflow-hidden bg-neutral-900 md:max-w-[28rem] lg:mx-0 lg:max-w-[30rem]">
+                  <div className="group relative mx-auto aspect-square w-full max-w-[26rem] overflow-hidden bg-neutral-900 sm:mx-0 md:max-w-[28rem] lg:max-w-[30rem]">
                     <Image
                       src={featuredMember.imageSrc}
                       alt=""
@@ -74,7 +80,7 @@ export function ContentSection() {
               ) : null}
 
               {secondaryTeam.length ? (
-                <ul className="flex w-full max-w-[68rem] flex-wrap justify-center gap-x-5 gap-y-8 lg:max-w-[28rem] lg:content-start lg:justify-start">
+                <ul className="flex w-full max-w-[68rem] flex-wrap justify-center gap-x-5 gap-y-8 sm:justify-start lg:max-w-[28rem] lg:content-start">
                   {secondaryTeam.map((m, i) => {
                     const linkedin = m.socials.find((s) => s.network === "linkedin")?.href;
                     return (
@@ -128,8 +134,11 @@ export function ContentSection() {
                   })}
                 </ul>
               ) : null}
+              </div>
             </div>
           ) : null}
+
+          <FaqAccordion className="mt-28 sm:mt-32 lg:mt-36" />
 
           <div
             className="animate-amp-reveal mt-14 hidden lg:mt-16"
