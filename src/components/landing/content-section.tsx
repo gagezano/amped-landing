@@ -141,11 +141,11 @@ export function ContentSection() {
           <FaqAccordion className="mt-28 sm:mt-32 lg:mt-36" />
 
           <div
-            className="animate-amp-reveal mt-14 hidden lg:mt-16"
+            className="animate-amp-reveal mt-14 lg:mt-16"
             style={{ ["--amp-reveal-delay" as string]: `${contactDelay}ms` }}
           >
             <Link
-              href="mailto:hello@amped.energy"
+              href="mailto:contact@amped.org"
               className="amp-button-cycle inline-flex h-[3.3rem] min-w-[9.7rem] items-center justify-center border border-white bg-black px-7 font-[family-name:var(--font-ranade)] text-base font-bold leading-tight tracking-[-0.04em] text-white transition-colors duration-200"
             >
               Get in Touch

@@ -4,7 +4,7 @@ import { useState, useSyncExternalStore } from "react";
 
 /** Full-bleed hero backdrop: looping GIF (reliable autoplay on iOS Low Power Mode); still JPG for reduced motion or if GIF fails. */
 const HERO_JPG = "/amped-center-still.jpg";
-const HERO_GIF = "/hero-v2.gif";
+const HERO_GIF = "/hero-v3.gif";
 
 /** Intrinsic ratio hint for CLS (matches source media: 1920×1280). */
 const HERO_BG_WIDTH = 1920;
